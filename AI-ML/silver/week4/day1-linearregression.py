@@ -1,0 +1,19 @@
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_squared_error
+import numpy as np
+
+#create a synthetic dataset(house prices based on square footage)
+x=np.array([[275],[300],[350],[400],[450],[500],[550],[600],[650],[700]])
+y=np.array([23, 26, 30, 35, 40, 45, 50, 55, 60, 65])
+
+x_train, x_test, y_train, y_test = train_test_split(x,y,test_size=0.2,random_state=42)
+
+#model training
+model=LinearRegression()
+model.fit(x_train,y_train)
+y_pred=model.predict(x_test)
+
+#evaluate the model
+mse=mean_squared_error(y_test,y_pred)
+print(f"Mean Squared Error: {mse:.2f}")
